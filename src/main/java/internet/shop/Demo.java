@@ -6,7 +6,7 @@ import internet.shop.service.ManufacturerService;
 import java.util.List;
 
 public class Demo {
-    private static Injector injector = Injector.getInstance("internet.internet.shop");
+    private static Injector injector = Injector.getInstance("internet.shop");
 
     public static void main(String[] args) {
         Manufacturer manufacturer = new Manufacturer();
@@ -26,24 +26,21 @@ public class Demo {
 
         printResult(manufacturerService);
         manufacturerService.delete(1L);
-        manufacturerService.delete(3L);
+        manufacturerService.delete(2L);
         printResult(manufacturerService);
 
         Manufacturer manufacturer3 = new Manufacturer();
         manufacturer3.setCountry("Italian");
         manufacturer3.setName("Pastarozo");
-        manufacturer3.setId(2L);
+        manufacturer3.setId(3L);
 
+        manufacturerService.create(manufacturer2);
         manufacturerService.update(manufacturer3);
         printResult(manufacturerService);
     }
 
     private static void printResult(ManufacturerService manufacturerService) {
         List<Manufacturer> all = manufacturerService.getAll();
-        for (int i = 0; i < all.size(); i++) {
-            System.out.println("Id: " + all.get(i).getId()
-                    + ", country: " + all.get(i).getCountry()
-                    + ", name: " + all.get(i).getName());
-        }
+        all.forEach(System.out::println);
     }
 }

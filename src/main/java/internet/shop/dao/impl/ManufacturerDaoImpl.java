@@ -17,7 +17,13 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return Optional.ofNullable(Storage.getProduct(id));
+        List<Manufacturer> dbManufacturer = Storage.getDbManufacturer();
+        for (int i = 0; i < dbManufacturer.size(); i++) {
+            if (id == dbManufacturer.get(i).getId()) {
+                return Optional.of(dbManufacturer.get(i));
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -27,12 +33,25 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        return Optional.ofNullable(Storage.update(manufacturer))
-                .orElseThrow(() -> new RuntimeException("Not exist manufacture"));
+        List<Manufacturer> dbManufacturer = Storage.getDbManufacturer();
+        for (int i = 0; i < dbManufacturer.size(); i++) {
+            if (manufacturer.getId() == dbManufacturer.get(i).getId()) {
+                dbManufacturer.set(i, manufacturer);
+                return manufacturer;
+            }
+        }
+        return null;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.delete(id);
+        List<Manufacturer> dbManufacturer = Storage.getDbManufacturer();
+        for (int i = 0; i < dbManufacturer.size(); i++) {
+            if (id == dbManufacturer.get(i).getId()) {
+                dbManufacturer.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 }
