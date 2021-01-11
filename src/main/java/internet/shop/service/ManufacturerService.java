@@ -1,4 +1,4 @@
-package shop.service;
+package internet.shop.service;
 
 import internet.shop.model.Manufacturer;
 import java.util.List;

@@ -1,4 +1,4 @@
-package shop.model;
+package internet.shop.model;
 
 import java.util.List;
 

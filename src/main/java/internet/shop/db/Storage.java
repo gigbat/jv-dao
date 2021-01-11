@@ -1,4 +1,4 @@
-package shop.db;
+package internet.shop.db;
 
 import internet.shop.model.Manufacturer;
 import java.util.ArrayList;

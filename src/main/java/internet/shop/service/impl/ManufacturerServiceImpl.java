@@ -1,4 +1,4 @@
-package shop.service.impl;
+package internet.shop.service.impl;
 
 import internet.shop.dao.ManufacturerDao;
 import internet.shop.lib.Inject;

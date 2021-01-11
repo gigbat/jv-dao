@@ -1,9 +1,9 @@
-package shop.model;
+package internet.shop.model;
 
-public class Manufacturer {
+public class Driver {
     private Long id;
     private String name;
-    private String country;
+    private String licenceNumber;
 
     public Long getId() {
         return id;
@@ -21,11 +21,11 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public String getLicenceNumber() {
+        return licenceNumber;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setLicenceNumber(String licenceNumber) {
+        this.licenceNumber = licenceNumber;
     }
 }

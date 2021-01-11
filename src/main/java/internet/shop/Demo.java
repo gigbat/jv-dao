@@ -1,4 +1,4 @@
-package shop;
+package internet.shop;
 
 import internet.shop.lib.Injector;
 import internet.shop.model.Manufacturer;
@@ -6,7 +6,7 @@ import internet.shop.service.ManufacturerService;
 import java.util.List;
 
 public class Demo {
-    private static Injector injector = Injector.getInstance("internet.shop");
+    private static Injector injector = Injector.getInstance("internet.internet.shop");
 
     public static void main(String[] args) {
         Manufacturer manufacturer = new Manufacturer();
