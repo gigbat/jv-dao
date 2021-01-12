@@ -36,7 +36,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 return manufacturer;
             }
         }
-        throw new RuntimeException("You can't update manufacturer in DB");
+        throw new RuntimeException("You can't update " + manufacturer.getName() + " in DB");
     }
 
     @Override
