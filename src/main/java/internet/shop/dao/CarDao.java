@@ -1,7 +1,6 @@
 package internet.shop.dao;
 
 import internet.shop.model.Car;
-import internet.shop.model.Driver;
 import java.util.List;
 import java.util.Optional;
 

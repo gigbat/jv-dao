@@ -3,7 +3,6 @@ package internet.shop.dao.impl;
 import internet.shop.dao.DriverDao;
 import internet.shop.db.Storage;
 import internet.shop.lib.Dao;
-import internet.shop.model.Car;
 import internet.shop.model.Driver;
 import java.util.List;
 import java.util.Optional;

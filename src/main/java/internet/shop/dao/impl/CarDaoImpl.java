@@ -4,7 +4,6 @@ import internet.shop.dao.CarDao;
 import internet.shop.db.Storage;
 import internet.shop.lib.Dao;
 import internet.shop.model.Car;
-import internet.shop.model.Manufacturer;
 import java.util.List;
 import java.util.Optional;
 
