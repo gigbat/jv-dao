@@ -14,7 +14,7 @@ public class Storage {
     private static final List<Car> dbCar = new ArrayList<>();
     private static final List<Driver> dbDriver = new ArrayList<>();
 
-    public static void addProduct(Manufacturer manufacturer) {
+    public static void addProductManufacturer(Manufacturer manufacturer) {
         dbManufacturer.add(manufacturer);
         manufacturer.setId(manufacturerId++);
     }
