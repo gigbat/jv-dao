@@ -6,6 +6,7 @@ import internet.shop.lib.Dao;
 import internet.shop.model.Car;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Dao
 public class CarDaoImpl implements CarDao {
@@ -30,13 +31,11 @@ public class CarDaoImpl implements CarDao {
     @Override
     public Car update(Car car) {
         List<Car> dbCar = Storage.getDbCar();
-        for (int i = 0; i < dbCar.size(); i++) {
-            if (car.getId().equals(dbCar.get(i).getId())) {
-                dbCar.set(i, car);
-                return car;
-            }
-        }
-        throw new RuntimeException("You can't update " + car.getModel() + " in DB");
+        IntStream.range(0, dbCar.size())
+                .filter(i -> dbCar.get(i).equals(car))
+                .findFirst()
+                .ifPresent(i -> dbCar.set(i, car));
+        return car;
     }
 
     @Override
