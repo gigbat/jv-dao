@@ -36,13 +36,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 return manufacturer;
             }
         }
-        return null;
+        throw new RuntimeException("You can't update manufacturer in DB");
     }
 
     @Override
     public boolean delete(Long id) {
-        List<Manufacturer> dbManufacturer = Storage.getDbManufacturer();
-        dbManufacturer.removeIf(i -> i.getId().equals(id));
-        return true;
+        return Storage.getDbManufacturer().removeIf(i -> i.getId().equals(id));
     }
 }
