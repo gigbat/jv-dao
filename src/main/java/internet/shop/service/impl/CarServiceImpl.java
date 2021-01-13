@@ -21,8 +21,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car get(Long id) {
-        return carDao.get(id).orElseThrow(()
-                -> new RuntimeException("Not exist id"));
+        return carDao.get(id).get();
     }
 
     @Override
@@ -32,9 +31,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car update(Car car) {
-        if (carDao.update(car) == null) {
-            throw new RuntimeException("Not exist car");
-        }
         return carDao.update(car);
     }
 
@@ -45,32 +41,18 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void addDriverToCar(Driver driver, Car car) {
-        car.setDrivers(driver);
-        if (!carDao.get(car.getId()).isEmpty()) {
-            carDao.update(car);
-            return;
-        }
-        carDao.create(car);
+        car.getDrivers().add(driver);
+        carDao.update(car);
     }
 
     @Override
     public void removeDriverFromCar(Driver driver, Car car) {
-        List<Driver> drivers = car.getDrivers();
-        drivers.remove(drivers.get(drivers.indexOf(driver)));
+        car.getDrivers().add(driver);
+        carDao.delete(car.getId());
     }
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        List<Car> result = new ArrayList<>();
-        List<Car> cars = carDao.getAll();
-        for (int i = 0; i < cars.size(); i++) {
-            List<Driver> drivers = cars.get(i).getDrivers();
-            for (int j = 0; j < drivers.size(); j++) {
-                if (driverId.equals(drivers.get(j).getId())) {
-                    result.add(cars.get(i));
-                }
-            }
-        }
-        return result;
+        return carDao.getAllByDriver(driverId);
     }
 }

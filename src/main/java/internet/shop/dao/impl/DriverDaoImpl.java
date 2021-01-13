@@ -12,25 +12,25 @@ import java.util.stream.IntStream;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        Storage.addProductDriver(driver);
+        Storage.addDriver(driver);
         return driver;
     }
 
     @Override
     public Optional<Driver> get(Long id) {
-        return Storage.getDbDriver().stream()
+        return Storage.getDrivers().stream()
                 .filter(x -> x.getId().equals(id))
                 .findFirst();
     }
 
     @Override
     public List<Driver> getAll() {
-        return Storage.getDbDriver();
+        return Storage.getDrivers();
     }
 
     @Override
     public Driver update(Driver driver) {
-        List<Driver> dbDriver = Storage.getDbDriver();
+        List<Driver> dbDriver = Storage.getDrivers();
         IntStream.range(0, dbDriver.size())
                 .filter(i -> dbDriver.get(i).equals(driver))
                 .findFirst()
@@ -40,6 +40,6 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        return Storage.getDbDriver().removeIf(i -> i.getId().equals(id));
+        return Storage.getDrivers().removeIf(i -> i.getId().equals(id));
     }
 }

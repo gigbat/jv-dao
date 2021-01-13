@@ -19,8 +19,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElseThrow(()
-                -> new RuntimeException("Not exist id"));
+        return driverDao.get(id).get();
     }
 
     @Override
@@ -30,9 +29,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver update(Driver driver) {
-        if (driverDao.update(driver) == null) {
-            throw new RuntimeException("Not exist driver");
-        }
         return driverDao.update(driver);
     }
 
