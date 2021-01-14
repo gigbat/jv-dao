@@ -1,7 +1,7 @@
 package internet.shop.dao.impl;
 
 import internet.shop.dao.ManufacturerDao;
-import internet.shop.exception.NoConnectDBException;
+import internet.shop.exception.NoConnectException;
 import internet.shop.lib.Dao;
 import internet.shop.model.Manufacturer;
 import internet.shop.util.ConnectionUtil;
@@ -33,7 +33,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 manufacturer.setId(generatedKeys.getObject(1, Long.class));
             }
         } catch (SQLException exception) {
-            throw new NoConnectDBException("Can't connect to DB", exception);
+            throw new NoConnectException("Can't connect to DB", exception);
         }
         return manufacturer;
     }
@@ -53,7 +53,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 optionalManufacturer = Optional.of(setDataIntoManufacturer(resultSet));
             }
         } catch (SQLException exception) {
-            throw new NoConnectDBException("Can't connect to DB", exception);
+            throw new NoConnectException("Can't connect to DB", exception);
         }
         return optionalManufacturer;
     }
@@ -94,7 +94,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 return manufacturer;
             }
         } catch (SQLException exception) {
-            throw new NoConnectDBException("Can't connect to DB", exception);
+            throw new NoConnectException("Can't connect to DB", exception);
         }
         throw new RuntimeException("You can't update " + manufacturer + " in DB");
     }
@@ -109,7 +109,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException exception) {
-            throw new NoConnectDBException("Can't connect to DB", exception);
+            throw new NoConnectException("Can't connect to DB", exception);
         }
     }
 
