@@ -14,14 +14,13 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        manufacturerDao.create(manufacturer);
-        return manufacturer;
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id)
-                .orElseThrow(() -> new RuntimeException("Not exist id"));
+        return manufacturerDao.get(id).orElseThrow(()
+                -> new RuntimeException("Data was deleted or not exist"));
     }
 
     @Override
@@ -31,9 +30,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        if (manufacturerDao.update(manufacturer) == null) {
-            throw new RuntimeException("Not exist manufacturer");
-        }
         return manufacturerDao.update(manufacturer);
     }
 
