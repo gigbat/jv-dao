@@ -1,5 +1,6 @@
 package internet.shop.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Car {
@@ -7,6 +8,10 @@ public class Car {
     private String model;
     private Manufacturer manufacturer;
     private List<Driver> drivers;
+
+    public Car() {
+        drivers = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -34,5 +39,15 @@ public class Car {
 
     public List<Driver> getDrivers() {
         return drivers;
+    }
+
+    public void setDrivers(Driver driver) {
+        drivers.add(driver);
+    }
+
+    @Override
+    public String toString() {
+        return "Car{ id=" + id
+                + ", model='" + model + '}';
     }
 }
