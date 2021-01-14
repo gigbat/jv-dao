@@ -1,6 +1,7 @@
 package internet.shop.dao.impl;
 
 import internet.shop.dao.ManufacturerDao;
+import internet.shop.exception.NoConnectDBException;
 import internet.shop.lib.Dao;
 import internet.shop.model.Manufacturer;
 import internet.shop.util.ConnectionUtil;
@@ -28,11 +29,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            while (generatedKeys.next()) {
+            if (generatedKeys.next()) {
                 manufacturer.setId(generatedKeys.getObject(1, Long.class));
             }
         } catch (SQLException exception) {
-            throw new RuntimeException("Can't connect to DB", exception);
+            throw new NoConnectDBException("Can't connect to DB", exception);
         }
         return manufacturer;
     }
@@ -49,14 +50,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Manufacturer manufacturer = new Manufacturer();
-                manufacturer.setId(resultSet.getLong("manufacturer_id"));
-                manufacturer.setName(resultSet.getString("manufacturer_name"));
-                manufacturer.setCountry(resultSet.getString("manufacturer_country"));
-                optionalManufacturer = Optional.of(manufacturer);
+                optionalManufacturer = Optional.of(setDataIntoManufacturer(resultSet));
             }
         } catch (SQLException exception) {
-            throw new RuntimeException("Can't connect to DB", exception);
+            throw new NoConnectDBException("Can't connect to DB", exception);
         }
         return optionalManufacturer;
     }
@@ -69,7 +66,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Manufacturer manufacturer = new Manufacturer();
                 manufacturer.setId(resultSet.getLong("manufacturer_id"));
                 manufacturer.setName(resultSet.getString("manufacturer_name"));
@@ -97,7 +94,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 return manufacturer;
             }
         } catch (SQLException exception) {
-            throw new RuntimeException("Can't connect to DB", exception);
+            throw new NoConnectDBException("Can't connect to DB", exception);
         }
         throw new RuntimeException("You can't update " + manufacturer + " in DB");
     }
@@ -112,7 +109,15 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException exception) {
-            throw new RuntimeException("Can't connect to DB", exception);
+            throw new NoConnectDBException("Can't connect to DB", exception);
         }
+    }
+
+    private Manufacturer setDataIntoManufacturer(ResultSet resultSet) throws SQLException {
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(resultSet.getLong("manufacturer_id"));
+        manufacturer.setName(resultSet.getString("manufacturer_name"));
+        manufacturer.setCountry(resultSet.getString("manufacturer_country"));
+        return manufacturer;
     }
 }
