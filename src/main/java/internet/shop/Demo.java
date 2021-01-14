@@ -122,14 +122,4 @@ public class Demo {
         driverService.update(driver3);
         printResultManufacturerDriver(driverService);*/
     }
-
-    private static void printResultManufacturerCar(CarService carService) {
-        List<Car> all = carService.getAll();
-        all.forEach(System.out::println);
-    }
-
-    private static void printResultManufacturerDriver(DriverService driverService) {
-        List<Driver> all = driverService.getAll();
-        all.forEach(System.out::println);
-    }
 }
