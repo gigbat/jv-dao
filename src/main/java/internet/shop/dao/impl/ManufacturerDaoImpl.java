@@ -90,7 +90,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setLong(3, manufacturer.getId());
 
-            if (preparedStatement.executeUpdate() == 1) {
+            if (preparedStatement.executeUpdate() > 0) {
                 return manufacturer;
             }
         } catch (SQLException exception) {
@@ -107,7 +107,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
-            return preparedStatement.executeUpdate() == 1;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException exception) {
             throw new NoConnectException("Can't connect to DB", exception);
         }
