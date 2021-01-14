@@ -67,11 +67,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Manufacturer manufacturer = new Manufacturer();
-                manufacturer.setId(resultSet.getLong("manufacturer_id"));
-                manufacturer.setName(resultSet.getString("manufacturer_name"));
-                manufacturer.setCountry(resultSet.getString("manufacturer_country"));
-                manufacturerList.add(manufacturer);
+                manufacturerList.add(setDataIntoManufacturer(resultSet));
             }
         } catch (SQLException exception) {
             throw new RuntimeException("Can't connect to DB", exception);
