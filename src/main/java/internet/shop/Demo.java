@@ -1,11 +1,7 @@
 package internet.shop;
 
 import internet.shop.lib.Injector;
-import internet.shop.model.Car;
-import internet.shop.model.Driver;
 import internet.shop.model.Manufacturer;
-import internet.shop.service.CarService;
-import internet.shop.service.DriverService;
 import internet.shop.service.ManufacturerService;
 
 public class Demo {
