@@ -20,7 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         return manufacturerDao.get(id).orElseThrow(()
-                -> new RuntimeException("Data was deleted or not exist"));
+                -> new RuntimeException("Manufacturer with id " + id + " was not found"));
     }
 
     @Override
