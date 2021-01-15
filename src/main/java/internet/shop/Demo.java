@@ -1,47 +1,47 @@
 package internet.shop;
 
 import internet.shop.lib.Injector;
-import internet.shop.model.Car;
-import internet.shop.model.Driver;
 import internet.shop.model.Manufacturer;
-import internet.shop.service.CarService;
-import internet.shop.service.DriverService;
 import internet.shop.service.ManufacturerService;
-import java.util.List;
 
 public class Demo {
     private static Injector injector = Injector.getInstance("internet.shop");
 
     public static void main(String[] args) {
         Manufacturer manufacturer = new Manufacturer();
-        Manufacturer manufacturer2 = new Manufacturer();
-
+        manufacturer.setId(10L);
         manufacturer.setCountry("Ukraine");
         manufacturer.setName("MiksMaks");
 
+        Manufacturer manufacturer2 = new Manufacturer();
+        manufacturer2.setId(20L);
         manufacturer2.setCountry("Germany");
         manufacturer2.setName("Ulder");
 
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
 
-        manufacturerService.create(manufacturer);
-        manufacturerService.create(manufacturer2);
+        System.out.println(manufacturerService.create(manufacturer));
+        System.out.println(manufacturer.getId());
+        System.out.println(manufacturerService.create(manufacturer2));
+        System.out.println(manufacturer2.getId());
 
-        printResultManufacturer(manufacturerService);
-        manufacturerService.delete(1L);
-        manufacturerService.delete(2L);
-        printResultManufacturer(manufacturerService);
+        System.out.println(manufacturerService.get(3L));
+        System.out.println(manufacturerService.get(4L));
+
+        System.out.println(manufacturerService.delete(1L));
+        System.out.println(manufacturerService.delete(2L));
+        System.out.println(manufacturerService.delete(700L));
 
         Manufacturer manufacturer3 = new Manufacturer();
         manufacturer3.setCountry("Italian");
         manufacturer3.setName("Pastarozo");
         manufacturer3.setId(3L);
 
-        manufacturerService.create(manufacturer2);
         manufacturerService.update(manufacturer3);
-        printResultManufacturer(manufacturerService);
-        System.out.println("====================================");
+        System.out.println(manufacturerService.get(3L));
+        System.out.println(manufacturerService.get(100L));
+        /*System.out.println("====================================");
         Driver driver1 = new Driver();
         driver1.setId(1L);
         driver1.setName("Vasya");
@@ -116,21 +116,6 @@ public class Demo {
         driver3.setId(4L);
         driver3.setLicenceNumber("000");
         driverService.update(driver3);
-        printResultManufacturerDriver(driverService);
-    }
-
-    private static void printResultManufacturer(ManufacturerService manufacturerService) {
-        List<Manufacturer> all = manufacturerService.getAll();
-        all.forEach(System.out::println);
-    }
-
-    private static void printResultManufacturerCar(CarService carService) {
-        List<Car> all = carService.getAll();
-        all.forEach(System.out::println);
-    }
-
-    private static void printResultManufacturerDriver(DriverService driverService) {
-        List<Driver> all = driverService.getAll();
-        all.forEach(System.out::println);
+        printResultManufacturerDriver(driverService);*/
     }
 }
