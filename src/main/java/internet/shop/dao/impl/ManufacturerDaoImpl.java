@@ -69,7 +69,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 manufacturerList.add(setDataIntoManufacturer(resultSet));
             }
         } catch (SQLException exception) {
-            throw new RuntimeException("Can't get all data from DB", exception);
+            throw new DataProcessingException("Can't get all data from DB", exception);
         }
         return manufacturerList;
     }
@@ -78,7 +78,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufacturers SET manufacturer_name = ?,"
                 + " manufacturer_country = ? where manufacturer_id = ? "
-                + "and manufacturer_deleted <> 1";
+                + "and manufacturer_deleted = false";
 
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -92,7 +92,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         } catch (SQLException exception) {
             throw new DataProcessingException("Can't update the data - " + manufacturer, exception);
         }
-        throw new RuntimeException("You can't update " + manufacturer + " in DB");
+        throw new RuntimeException("No manufacturer " + manufacturer + " to update in DB");
     }
 
     @Override
