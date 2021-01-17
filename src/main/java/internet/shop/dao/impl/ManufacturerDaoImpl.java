@@ -65,6 +65,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
+            manufacturerList.add(setDataIntoManufacturer(resultSet));
             while (resultSet.next()) {
                 manufacturerList.add(setDataIntoManufacturer(resultSet));
             }
