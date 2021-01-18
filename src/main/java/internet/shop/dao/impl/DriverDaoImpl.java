@@ -18,7 +18,7 @@ import java.util.Optional;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (driver_name, driver_license_number) "
+        String query = "INSERT INTO drivers (name, license_number) "
                 + "values (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query,
@@ -40,14 +40,16 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Optional<Driver> get(Long id) {
         Optional<Driver> optionalDriver = Optional.empty();
-        String query = "SELECT * FROM drivers where driver_id = ? and driver_deleted = false;";
+        String query = "SELECT * FROM drivers where id = ? and deleted = false;";
 
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            optionalDriver = Optional.of(setDataIntoDriver(resultSet));
+            if (resultSet.next()) {
+                optionalDriver = Optional.of(setDataIntoDriver(resultSet));
+            }
         } catch (SQLException exception) {
             throw new DataProcessingException("Can't get the data by id: " + id, exception);
         }
@@ -57,12 +59,11 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public List<Driver> getAll() {
         List<Driver> driverList = new ArrayList<>();
-        String query = "SELECT * FROM drivers where driver_deleted = false;";
+        String query = "SELECT * FROM drivers where deleted = false;";
 
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            driverList.add(setDataIntoDriver(resultSet));
             while (resultSet.next()) {
                 driverList.add(setDataIntoDriver(resultSet));
             }
@@ -75,8 +76,8 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver update(Driver driver) {
         String query = "UPDATE drivers SET "
-                + "driver_name = ?, driver_license_number = ? "
-                + "where driver_deleted = false and driver_id = ?";
+                + "name = ?, license_number = ? "
+                + "where deleted = false and id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, driver.getName());
@@ -94,8 +95,8 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE drivers SET driver_deleted = true "
-                + "where driver_id = ?";
+        String query = "UPDATE drivers SET deleted = true "
+                + "where id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
@@ -107,11 +108,9 @@ public class DriverDaoImpl implements DriverDao {
 
     private Driver setDataIntoDriver(ResultSet resultSet) throws SQLException {
         Driver driver = new Driver();
-        if (resultSet.next()) {
-            driver.setId(resultSet.getObject(1, Long.class));
-            driver.setName(resultSet.getObject(2, String.class));
-            driver.setLicenceNumber(resultSet.getObject(3, String.class));
-        }
+        driver.setId(resultSet.getObject(1, Long.class));
+        driver.setName(resultSet.getObject(2, String.class));
+        driver.setLicenceNumber(resultSet.getObject(3, String.class));
         return driver;
     }
 }
