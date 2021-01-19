@@ -13,17 +13,14 @@ public class Demo {
 
     public static void main(String[] args) {
         Driver driver1 = new Driver();
-        driver1.setId(1L);
         driver1.setName("Bob");
         driver1.setLicenceNumber("123-321");
 
         Driver driver2 = new Driver();
-        driver2.setId(2L);
         driver2.setName("Alice");
         driver2.setLicenceNumber("4821-00");
 
         Driver driver3 = new Driver();
-        driver3.setId(100L);
         driver3.setName("John");
         driver3.setLicenceNumber("998-12-33");
 
@@ -34,9 +31,9 @@ public class Demo {
         driverService.create(driver2);
         driverService.create(driver3);
 
-        System.out.println(driverService.get(3L));
-        System.out.println(driverService.get(2L));
-        System.out.println(driverService.get(1L));
+        System.out.println(driverService.get(driver3.getId()));
+        System.out.println(driverService.get(driver2.getId()));
+        System.out.println(driverService.get(driver1.getId()));
 
         System.out.println(driverService.getAll());
 
@@ -46,7 +43,7 @@ public class Demo {
         driver4.setLicenceNumber("192429-1243324");
 
         driverService.update(driver4);
-        System.out.println(driverService.get(1L));
+        System.out.println(driverService.get(driver4.getId()));
 
         Driver driver5 = new Driver();
         driver5.setId(3L);
@@ -54,7 +51,7 @@ public class Demo {
         driver5.setLicenceNumber("7878-444");
 
         driverService.update(driver5);
-        System.out.println(driverService.get(3L));
+        System.out.println(driverService.get(driver5.getId()));
 
         /*driverService.delete(1L);
         driverService.delete(2L);
@@ -62,17 +59,14 @@ public class Demo {
         System.out.println(driverService.getAll());
         System.out.println("=============================================");
         Manufacturer manufacturer1 = new Manufacturer();
-        manufacturer1.setId(1L);
         manufacturer1.setCountry("Germany");
         manufacturer1.setName("Intro");
 
         Manufacturer manufacturer2 = new Manufacturer();
-        manufacturer2.setId(2L);
         manufacturer2.setCountry("Britain");
         manufacturer2.setName("Flex");
 
         Manufacturer manufacturer3 = new Manufacturer();
-        manufacturer3.setId(3L);
         manufacturer3.setCountry("Ukraine");
         manufacturer3.setName("Kozak");
 
@@ -83,9 +77,9 @@ public class Demo {
         manufacturerService.create(manufacturer2);
         manufacturerService.create(manufacturer3);
 
-        System.out.println(manufacturerService.get(3L));
-        System.out.println(manufacturerService.get(2L));
-        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.get(manufacturer3.getId()));
+        System.out.println(manufacturerService.get(manufacturer2.getId()));
+        System.out.println(manufacturerService.get(manufacturer1.getId()));
 
         System.out.println(manufacturerService.getAll());
 
@@ -102,34 +96,22 @@ public class Demo {
         manufacturerService.update(manufacturer4);
         manufacturerService.update(manufacturer5);
 
-        System.out.println(manufacturerService.get(2L));
-        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.get(manufacturer4.getId()));
+        System.out.println(manufacturerService.get(manufacturer5.getId()));
 
-        /*manufacturerService.delete(1L);
-        manufacturerService.delete(2L);
-        manufacturerService.delete(3L);*/
         System.out.println(manufacturerService.getAll());
         System.out.println("====================================");
 
         Car car1 = new Car();
-        car1.setId(1L);
         car1.setModel("Audi");
-        car1.setDrivers(driver1);
-        car1.setDrivers(driver2);
-        car1.setDrivers(driver3);
         car1.setManufacturer(manufacturer1);
 
         Car car2 = new Car();
-        car2.setId(2L);
         car2.setModel("Tesla");
-        car2.setDrivers(driver1);
-        car2.setDrivers(driver3);
         car2.setManufacturer(manufacturer2);
 
         Car car3 = new Car();
-        car3.setId(2L);
         car3.setModel("BMW");
-        car3.setDrivers(driver1);
         car3.setManufacturer(manufacturer3);
 
         CarService carService = (CarService) injector.getInstance(CarService.class);
@@ -138,15 +120,31 @@ public class Demo {
         carService.create(car2);
         carService.create(car3);
 
+        carService.addDriverToCar(driver1, car1);
+        carService.addDriverToCar(driver2, car1);
+        carService.addDriverToCar(driver3, car1);
+
+        carService.addDriverToCar(driver1, car2);
+        carService.addDriverToCar(driver3, car2);
+
+        carService.addDriverToCar(driver1, car3);
+
+        Car car4 = new Car();
+        car4.setId(2L);
+        car4.setModel("QWqsdasf");
+        car4.setDrivers(driver1);
+        car4.setManufacturer(manufacturer3);
+
         carService.update(car1);
         carService.update(car2);
         carService.update(car3);
+        carService.update(car4);
 
-        System.out.println(carService.get(3L));
-        System.out.println(carService.get(2L));
-        System.out.println(carService.get(1L).getDrivers());
+        System.out.println(carService.get(car3.getId()));
+        System.out.println(carService.get(car4.getId()));
+        System.out.println(carService.get(car1.getId()).getDrivers());
         System.out.println(carService.getAll());
 
-        System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAllByDriver(driver1.getId()));
     }
 }

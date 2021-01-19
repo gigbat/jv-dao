@@ -52,7 +52,7 @@ CREATE TABLE `internet_shop`.`cars_drivers`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
     CONSTRAINT `id`
-        FOREIGN KEY (`driver_id`)
+        FOREIGN KEY (`car_id`)
             REFERENCES `internet_shop`.`cars` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
