@@ -28,8 +28,15 @@ public class AddCarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Manufacturer manufacturer = manufacturerService
-                .get(Long.parseLong(req.getParameter("manufacturer_id")));
+        Manufacturer manufacturer = null;
+        try {
+            manufacturer = manufacturerService
+                    .get(Long.parseLong(req.getParameter("manufacturer_id")));
+        } catch (RuntimeException e) {
+            req.setAttribute("exception", e.getMessage());
+            req.getRequestDispatcher("/WEB-INF/views/cars/create/addCar/create_car.jsp")
+                    .forward(req, resp);
+        }
         String model = req.getParameter("model");
 
         Car car = new Car();
@@ -37,6 +44,6 @@ public class AddCarController extends HttpServlet {
         car.setModel(model);
 
         carService.create(car);
-        resp.sendRedirect("/");
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }

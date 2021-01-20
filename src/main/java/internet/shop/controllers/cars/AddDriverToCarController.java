@@ -31,10 +31,17 @@ public class AddDriverToCarController extends HttpServlet {
         Long driverId = Long.valueOf(request.getParameter("driver_id"));
         Long carId = Long.valueOf(request.getParameter("car_id"));
 
-        Car car = carService.get(carId);
-        Driver driver = driverService.get(driverId);
-
+        Car car = null;
+        Driver driver = null;
+        try {
+            car = carService.get(carId);
+            driver = driverService.get(driverId);
+        } catch (RuntimeException e) {
+            request.setAttribute("exception", "Id car or driver was not found");
+            request.getRequestDispatcher("/WEB-INF/views/cars/create"
+                    + "/addDriverToCar/addDriverToCar.jsp").forward(request, response);
+        }
         carService.addDriverToCar(driver, car);
-        response.sendRedirect("/");
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }
