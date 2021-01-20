@@ -236,8 +236,8 @@ public class CarDaoImpl implements CarDao {
 
         List<Driver> driverList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement stSelectDrivers = connection
-                     .prepareStatement(queryCreateDriver)) {
+                PreparedStatement stSelectDrivers = connection
+                         .prepareStatement(queryCreateDriver)) {
             stSelectDrivers.setLong(1, id);
             ResultSet resultSet = stSelectDrivers.executeQuery();
             while (resultSet.next()) {
