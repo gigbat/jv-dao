@@ -27,10 +27,11 @@
 <body>
 <h1 style="text-align: center; font-size: 25px; margin-top: 20px; color: blue;">Welcome, dear User!</h1>
 <a href="${pageContext.request.contextPath}/manufacturers/create">Page to create manufacturer</a>
-<a href="${pageContext.request.contextPath}/manufacturers/get/getAll">Page to get all manufacturer</a>
+<a href="${pageContext.request.contextPath}/manufacturers">Page to get all manufacturer</a>
 <a href="${pageContext.request.contextPath}/drivers/create">Page to create driver</a>
-<a href="${pageContext.request.contextPath}/drivers/get/getAll">Page to get all driver</a>
+<a href="${pageContext.request.contextPath}/drivers">Page to get all driver</a>
 <a href="${pageContext.request.contextPath}/cars/create/addCar">Page to create car</a>
 <a href="${pageContext.request.contextPath}/cars/create/addDriverToCar">Page to add driver to car</a>
+<a href="${pageContext.request.contextPath}/cars">Page to get all car</a>
 </body>
 </html>
