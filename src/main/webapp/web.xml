@@ -11,6 +11,66 @@
 
     <servlet-mapping>
         <servlet-name>index</servlet-name>
-        <url-pattern>/index</url-pattern>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createManufacturer</servlet-name>
+        <servlet-class>internet.shop.controllers.manufacturers.AddManufacturerController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createManufacturer</servlet-name>
+        <url-pattern>/manufacturers/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createDriver</servlet-name>
+        <servlet-class>internet.shop.controllers.drivers.AddDriverController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createDriver</servlet-name>
+        <url-pattern>/drivers/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createCar</servlet-name>
+        <servlet-class>internet.shop.controllers.cars.AddCarController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createCar</servlet-name>
+        <url-pattern>/cars/create/addCar</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getAllManufacturer</servlet-name>
+        <servlet-class>internet.shop.controllers.manufacturers.GetAllManufacturerController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getAllManufacturer</servlet-name>
+        <url-pattern>/manufacturers/get/getAll</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getAllDriver</servlet-name>
+        <servlet-class>internet.shop.controllers.drivers.GetAllDriverController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getAllDriver</servlet-name>
+        <url-pattern>/drivers/get/getAll</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addDriverToCar</servlet-name>
+        <servlet-class>internet.shop.controllers.cars.AddDriverToCarController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addDriverToCar</servlet-name>
+        <url-pattern>/cars/create/addDriverToCar</url-pattern>
     </servlet-mapping>
 </web-app>
