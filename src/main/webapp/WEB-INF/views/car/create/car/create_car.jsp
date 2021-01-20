@@ -6,7 +6,7 @@
 <body>
 <h1 style="text-align: center; font-size: 25px; margin-top: 20px; color: blue;">Create Car</h1>
 <h2>${exception}</h2>
-<form action="${pageContext.request.contextPath}/cars/create/addCar" method="post">
+<form action="${pageContext.request.contextPath}/car/create/car" method="post">
     Manufacturer id: <input type="text" placeholder="Enter manufacturer id" name="manufacturer_id">
     Model: <input type="text" placeholder="Enter model" name="model">
     <button type="submit">Submit</button>

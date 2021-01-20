@@ -21,8 +21,8 @@ public class AddDriverToCarController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/cars/create"
-                + "/addDriverToCar/addDriverToCar.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/car/create"
+                + "/driver/addDriverToCar.jsp").forward(req, resp);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class AddDriverToCarController extends HttpServlet {
             driver = driverService.get(driverId);
         } catch (RuntimeException e) {
             request.setAttribute("exception", "Id car or driver was not found");
-            request.getRequestDispatcher("/WEB-INF/views/cars/create"
-                    + "/addDriverToCar/addDriverToCar.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/car/create"
+                    + "/driver/addDriverToCar.jsp").forward(request, response);
         }
         carService.addDriverToCar(driver, car);
         response.sendRedirect(request.getContextPath() + "/");
