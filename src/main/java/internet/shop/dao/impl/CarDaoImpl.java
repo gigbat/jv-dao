@@ -170,8 +170,8 @@ public class CarDaoImpl implements CarDao {
 
         List<Car> cars = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement = connection
-                     .prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement(query)) {
             preparedStatement.setLong(1, driverId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
