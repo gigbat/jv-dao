@@ -71,27 +71,6 @@ public class CarDaoImpl implements CarDao {
         return Optional.ofNullable(car);
     }
 
-    private List<Driver> getDriversByCarId(Long id) {
-        String queryCreateDriver = "select d.id as driver_id, "
-                + "d.name as driver_name, d.license_number as driver_ln from drivers d "
-                + "inner join cars_drivers cd on cd.driver_id = d.id "
-                + "where cd.car_id = ? and d.deleted = false;";
-
-        List<Driver> driverList = new ArrayList<>();
-        try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement stSelectDrivers = connection
-                        .prepareStatement(queryCreateDriver)) {
-            stSelectDrivers.setLong(1, id);
-            ResultSet resultSet = stSelectDrivers.executeQuery();
-            while (resultSet.next()) {
-                driverList.add(createDriver(resultSet));
-            }
-        } catch (SQLException e) {
-            throw new DataProcessingException("Can't get drivers by id: " + id, e);
-        }
-        return driverList;
-    }
-
     @Override
     public List<Car> getAll() {
         String queryCreateCarAndManufacturer = "select c.id as car_id, c.model "
@@ -247,5 +226,26 @@ public class CarDaoImpl implements CarDao {
         driver.setName(resultSet.getObject("driver_name", String.class));
         driver.setLicenceNumber(resultSet.getObject("driver_ln", String.class));
         return driver;
+    }
+
+    private List<Driver> getDriversByCarId(Long id) {
+        String queryCreateDriver = "select d.id as driver_id, "
+                + "d.name as driver_name, d.license_number as driver_ln from drivers d "
+                + "inner join cars_drivers cd on cd.driver_id = d.id "
+                + "where cd.car_id = ? and d.deleted = false;";
+
+        List<Driver> driverList = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement stSelectDrivers = connection
+                     .prepareStatement(queryCreateDriver)) {
+            stSelectDrivers.setLong(1, id);
+            ResultSet resultSet = stSelectDrivers.executeQuery();
+            while (resultSet.next()) {
+                driverList.add(createDriver(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't get drivers by id: " + id, e);
+        }
+        return driverList;
     }
 }
