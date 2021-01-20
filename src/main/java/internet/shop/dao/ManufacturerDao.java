@@ -1,17 +1,7 @@
 package internet.shop.dao;
 
 import internet.shop.model.Manufacturer;
-import java.util.List;
-import java.util.Optional;
 
-public interface ManufacturerDao {
-    Manufacturer create(Manufacturer manufacturer);
+public interface ManufacturerDao extends GenericDao<Manufacturer, Long> {
 
-    Optional<Manufacturer> get(Long id);
-
-    List<Manufacturer> getAll();
-
-    Manufacturer update(Manufacturer manufacturer);
-
-    boolean delete(Long id);
 }
