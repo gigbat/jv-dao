@@ -134,7 +134,7 @@ public class Demo {
 
         Car car4 = new Car();
         car4.setModel("QWqsdasf");
-        car4.setDrivers(driver1);
+        car4.addDriver(driver1);
         car4.setManufacturer(manufacturer3);
 
         carService.create(car4);

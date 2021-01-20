@@ -41,7 +41,7 @@ public class Car {
         return drivers;
     }
 
-    public void setDrivers(Driver driver) {
+    public void addDriver(Driver driver) {
         drivers.add(driver);
     }
 
