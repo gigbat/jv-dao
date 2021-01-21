@@ -28,8 +28,8 @@ public class AddCarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Manufacturer manufacturer =  manufacturerService
-                    .get(Long.parseLong(req.getParameter("manufacturer_id")));
+        Manufacturer manufacturer = manufacturerService
+                .get(Long.parseLong(req.getParameter("manufacturer_id")));
         String model = req.getParameter("model");
 
         Car car = new Car();
