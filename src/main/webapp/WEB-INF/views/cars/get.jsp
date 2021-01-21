@@ -8,8 +8,8 @@
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>License Number</th>
+        <th>Model</th>
+        <th>Manufacturer name</th>
         <th>Driver name</th>
     </tr>
     <c:forEach var="car" items="${cars}">
@@ -24,9 +24,9 @@
                 <c:out value="${car.manufacturer.name}"/>
             </td>
             <td>
-                    <c:forEach var="driver" items="${car.drivers}">
-                        <c:out value="${driver.name}"/>
-                    </c:forEach>
+                <c:forEach var="driver" items="${car.drivers}">
+                    <c:out value="${driver.name}"/>
+                </c:forEach>
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/cars/delete?id=${car.id}">Delete</a>

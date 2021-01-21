@@ -2,28 +2,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Get all Manufacturer</title>
+    <title>Get all Driver</title>
 </head>
 <body>
 <table border="1">
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Country</th>
+        <th>License Number</th>
     </tr>
-    <c:forEach var="manufacturer" items="${manufacturers}">
+    <c:forEach var="driver" items="${drivers}">
         <tr>
             <td>
-                <c:out value="${manufacturer.id}"/>
+                <c:out value="${driver.id}"/>
             </td>
             <td>
-                <c:out value="${manufacturer.name}"/>
+                <c:out value="${driver.name}"/>
             </td>
             <td>
-                <c:out value="${manufacturer.country}"/>
+                <c:out value="${driver.licenceNumber}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/manufacturer/delete?id=${manufacturer.id}">Delete</a>
+                <a href="${pageContext.request.contextPath}/drivers/delete?id=${driver.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>

@@ -21,22 +21,15 @@ public class AddCarController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/car/create/car/create_car.jsp")
+        req.getRequestDispatcher("/WEB-INF/views/cars/create_car.jsp")
                 .forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Manufacturer manufacturer = null;
-        try {
-            manufacturer = manufacturerService
+        Manufacturer manufacturer =  manufacturerService
                     .get(Long.parseLong(req.getParameter("manufacturer_id")));
-        } catch (RuntimeException e) {
-            req.setAttribute("exception", e.getMessage());
-            req.getRequestDispatcher("/WEB-INF/views/car/create/car/create_car.jsp")
-                    .forward(req, resp);
-        }
         String model = req.getParameter("model");
 
         Car car = new Car();
