@@ -26,6 +26,8 @@
 </head>
 <body>
 <h1 style="text-align: center; font-size: 25px; margin-top: 20px; color: blue;">Welcome, dear User!</h1>
+<a href="${pageContext.request.contextPath}/login">Sign in</a>
+
 <a href="${pageContext.request.contextPath}/manufacturers/create">Page to create manufacturer</a>
 <a href="${pageContext.request.contextPath}/manufacturers">Page to get all manufacturer</a>
 <a href="${pageContext.request.contextPath}/drivers/create">Page to create driver</a>
@@ -33,5 +35,7 @@
 <a href="${pageContext.request.contextPath}/cars/create">Page to create car</a>
 <a href="${pageContext.request.contextPath}/cars/drivers/add">Page to add driver to car</a>
 <a href="${pageContext.request.contextPath}/cars">Page to get all car</a>
+
+<a href="${pageContext.request.contextPath}/driver/cars">Page to get all cars by driver</a>
 </body>
 </html>

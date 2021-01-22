@@ -59,3 +59,8 @@ CREATE TABLE `internet_shop`.`cars_drivers`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8;
+-- Add column login and password
+alter table drivers
+    add login varchar(16) not null unique;
+alter table drivers
+    add password varchar(16) not null;
