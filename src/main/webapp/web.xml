@@ -124,16 +124,6 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>currentCarsByDriver</servlet-name>
-        <servlet-class>internet.shop.controllers.drivers.GetMyCurrentCarsController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>currentCarsByDriver</servlet-name>
-        <url-pattern>/driver/cars</url-pattern>
-    </servlet-mapping>
-
     <filter>
         <filter-name>session</filter-name>
         <filter-class>internet.shop.web.filters.AuthenticationFilter</filter-class>
