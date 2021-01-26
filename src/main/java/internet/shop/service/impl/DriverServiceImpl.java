@@ -6,6 +6,7 @@ import internet.shop.lib.Service;
 import internet.shop.model.Driver;
 import internet.shop.service.DriverService;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -36,5 +37,10 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public boolean delete(Long id) {
         return driverDao.delete(id);
+    }
+
+    @Override
+    public Optional<Driver> findByLogin(String login) {
+        return driverDao.findByLogin(login);
     }
 }
