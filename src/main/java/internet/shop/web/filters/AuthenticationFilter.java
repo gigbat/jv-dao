@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthenticationFilter implements Filter {
     private static final String DRIVER_ID = "driver_id";
     private static final Set<String> urls = new HashSet<>();
-    private static final Injector injector = Injector.getInstance("internet.shop");
-    private DriverService driverService = (DriverService) injector
-            .getInstance(DriverService.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
