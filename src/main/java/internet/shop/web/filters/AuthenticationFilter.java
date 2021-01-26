@@ -1,7 +1,5 @@
 package internet.shop.web.filters;
 
-import internet.shop.lib.Injector;
-import internet.shop.service.DriverService;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
